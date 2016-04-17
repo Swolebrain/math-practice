@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    
+    <title> Practice Math!</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <nav>
+      <span class="logo">mathUP</span>
+      <span class="menu">
+        <span target="index.html">Play</span>
+        <span class="active" target="my-challenges.html">My Challenges</span>
+        <span target="join-challenge.html">Join Challenge</span>
+      </span>
+      <div class="right"><i class="fa fa-user fa-fw"></i> Lil_Timmy</div>
+    </nav>
+    <div class="tasks-container">
+      <ul id="tasks"></ul>
+    </div>
+    
+    <script src="js/jquery.js"></script>
+    <script src="globals.js"></script>
+    <script src="menu.js"></script>
+    <script>
+      $.ajax({url:HOST+"get-user-challenges?app=exercises&UID="+UID, 
+              success: (a,b,c)=> loadTasks(a)});
+      function loadTasks(tasksObj){
+        console.log(tasksObj);
+        tasksObj = JSON.parse(tasksObj);
+        tasksObj.forEach(function(elem, idx){
+          $("ul#tasks").append(`<li>${elem.description}</li>`)
+        });
+      }
+    </script>
+  </body>
+  
+</html>

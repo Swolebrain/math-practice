@@ -1,0 +1,120 @@
+.btn {
+  background: #fcbe32;
+  background-image: -webkit-linear-gradient(top, #fcbe32, #ff5f2e);
+  background-image: -moz-linear-gradient(top, #fcbe32, #ff5f2e);
+  background-image: -ms-linear-gradient(top, #fcbe32, #ff5f2e);
+  background-image: -o-linear-gradient(top, #fcbe32, #ff5f2e);
+  background-image: linear-gradient(to bottom, #fcbe32, #ff5f2e);
+  -webkit-border-radius: 13;
+  -moz-border-radius: 13;
+  border-radius: 13px;
+  font-family: Arial;
+  color: #ffffff;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  display:inline-block;
+  margin-top:50px;
+}
+
+.btn:hover {
+  background: #e6a210;
+  background-image: -webkit-linear-gradient(top, #e6a210, #ff450d);
+  background-image: -moz-linear-gradient(top, #e6a210, #ff450d);
+  background-image: -ms-linear-gradient(top, #e6a210, #ff450d);
+  background-image: -o-linear-gradient(top, #e6a210, #ff450d);
+  background-image: linear-gradient(to bottom, #e6a210, #ff450d);
+  text-decoration: none;
+}
+
+body{
+  font-size: 2em;
+  background-color: #d9e1e8;
+  font-family: 'Raleway', sans-serif;
+  overflow: hidden; 
+}
+nav{
+  background-color: #282c37;
+  letter-spacing: 2px;
+  color: white;
+  box-sizing: border-box;
+  width:100%;
+  height: 2em;
+}
+.logo{
+  font-family: 'Pacifico', cursive;
+  font-size: 1.2em;
+  margin-right:50px;
+  display:inline-block;
+}
+nav span{
+  padding: 0 .2em;
+  vertical-align: middle;
+}
+nav .menu, .menu span{
+  display:inline-block;
+  height:2em;
+  vertical-align:middle;
+  text-align: center; 
+}
+.menu span{
+  line-height: 2em;
+}
+.right{
+  margin-right:0;
+  display:inline-block;
+  line-height: 2.6666em;
+  float:right;
+  margin-right:0.2em;
+  font-size: 0.75em;
+}
+.active{
+  background-color:#fcbe32;
+}
+.problem-area{
+  height:5em;
+  background-image: url(header-bg.jpg);
+  line-height: 5em;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  font-size: 2em;
+}
+.response-area{
+  background-color:#9baec8;
+  text-align: center;
+}
+.problem-area input{
+  font-size: .7em;
+  width: 250px;
+}
+
+.tasks-container{
+  min-height:600px;
+  background-image: url(header-bg.jpg);
+  line-height: 2em;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  font-size: 1em;
+}
+.tasks-container ul{
+  list-style-type: none;
+}
+#overlay{
+  position:absolute;
+  top:0;
+  left:10%;
+  display:none;
+  background-image:url(success.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  width:80%;
+  height:700px;
+  z-index:5;
+  color:black;
+  text-align: center;
+}
+#overlay>div{
+  background-color:rgba(255,255,255,0.8);
+  padding: 20px 0;
+}

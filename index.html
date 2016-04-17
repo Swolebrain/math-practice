@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+  <head>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    
+    <title> Practice Math!</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <nav>
+      <span class="logo">mathUP</span>
+      <span class="menu">
+        <span class="active" target="index.html">Play</span>
+        <span target="my-challenges.html">My Challenges</span>
+        <span target="join-challenge.html">Join Challenge</span>
+      </span>     
+      <div class="right"><i class="fa fa-user fa-fw"></i> Lil_Timmy</div>
+    </nav>
+    <div class="problem-area">
+      <span id="problem"></span><input id="solution" type="text">
+    </div>
+    <div class="response-area">
+      <div class="btn">Submit!</div><br>
+      <div id="feedback"></div>
+    </div>
+    <div id="overlay">
+      <div>
+        <h2>Challenge Complete!</h2>
+        <h3>$<span id="earnings"></span> earned!!</h3>
+      </div>
+    </div>
+    <script src="js/jquery.js"></script>
+    <script src="globals.js"></script>
+    <script src="menu.js"></script>
+    <script>
+      var h = window.innerHeight - $("nav").css("height").slice(0,-2) -
+          $(".problem-area").css("height").slice(0,-2);
+      $(".response-area").css("height", Math.max(0,h));
+      loadProblem();
+      $(".response-area .btn").click(handleSubmit);
+      $(document).keypress(function(e){
+        if(e.keyCode === 13) handleSubmit();
+      });
+      
+      function generateProblem(){
+        var num1 = parseInt(Math.random()*100)*parseInt(Math.random()*9 + 1)-parseInt(Math.random()*19+1);
+        var num2 = parseInt(Math.random()*9+1);
+        return num1 + " * " + num2 +" = ";
+      }
+      function loadProblem(){
+        $("#problem").html(generateProblem());
+      }
+      function feedback(str){
+        $("#feedback").show().html(str);
+        setTimeout(clearFeedback,1000);
+      }
+      function clearFeedback(){
+        $("#feedback").fadeOut("slow");
+      }
+      function handleSubmit(){
+        var sol = $("#solution").val();
+        var correctSol = eval($("#problem").html().slice(0,-2));
+        if (sol == correctSol){
+          feedback("correct!");
+          $.ajax({
+            url: HOST+"add-points?app=exercises&group=2100&challenge=1110&UID=200&points=1",
+            method: "POST",
+            success: function(resp, text, xhr){
+              console.log(resp);
+              resp = JSON.parse(resp);
+              //HERE IS WHERE I HANDLE CHALLENGE COMPLETION
+              if (resp.hasOwnProperty("completedTask")){
+                //message for task completed
+                $("#earnings").html(resp.paymentAmount);
+                $("#overlay").show();
+                setTimeout(function(){
+                  $("#overlay").fadeOut("slow");
+                }, 1000);
+              }
+              //update points
+            }
+          });
+        }
+        else{
+          feedback("wrong, correct answer was "+correctSol);
+        }
+        setTimeout(function(){
+          loadProblem();
+          $("#solution").val("");
+        }, 400);
+      }
+      function solve(){
+        var correctSol = eval($("#problem").html().slice(0,-2));
+        $("#solution").val(correctSol);
+        handleSubmit();
+      }
+    </script>
+  </body>
+</html>
